@@ -1,0 +1,10 @@
+spring:
+  datasource: 
+    username: M17
+    password: Mm779322!
+    url: jdbc:mysql://59.124.223.227:6666/M17
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    sql-show: true  

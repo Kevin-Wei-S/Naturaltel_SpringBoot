@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>NaturalTel</title>
+</head>
+<body>
+
+	<br>
+	<a th:href="@{/naturaltel/list}"><button>查詢資料</button></a>
+	<button id="add_btn" onclick="popAddPage()">新增資料</button>
+
+	<table id="t_list" th:if="${list != null}">
+		<tr>
+			<th>idx</th>
+			<th>Key</th>
+			<th>Value</th>
+		</tr>
+		<tr th:each="data : ${list}">
+			<td th:text="${data.idx}"></td>
+			<td th:text="${data.key}"></td>
+			<td th:text="${data.value}"></td>
+		</tr>
+	</table>
+	<!-- 跳窗頁面 -->
+	<div id="background_pop" align="center">
+		<div id="div_pop">
+			<form th:action="@{/naturaltel/add}" method="post">
+				<table id="t_pop" border="1">
+					<tr>
+						<td colspan="2">insert Data</td>
+					</tr>
+					<tr>
+						<td>Key</td>
+						<td><input type="text" name="key"></td>
+					</tr>
+					<tr>
+						<td>Value</td>
+						<td><input type="text" name="value"></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input id="close_btn" type="button" value="Cancel">
+							<input type="submit" value="OK">
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+
+</body>
+<script>
+	
+	var background_pop = document.getElementById("background_pop");
+	var close_btn = document.getElementById("close_btn");
+		
+	function popAddPage(){
+		background_pop.style.display = "block";
+	}
+		
+	close_btn.onclick = function close(){
+		background_pop.style.display = "none";
+	}
+		
+	window.onclick = function close(e){
+		if(e.target == background_pop){
+			background_pop.style.display = "none";
+		}
+	}
+	
+</script>
+<style>
+#t_list {
+	margin: 3%;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+#t_list th, #t_list td {
+	padding: 0.5rem 1.5rem;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+button {
+	border-radius: 10px;
+	font-size: 1.3rem;
+	font-weight: bold;
+	color: #fff;
+	background-color: #1e90ff;
+	padding: 0.2rem 2rem;
+	margin-right: 1.5%;
+}
+
+/*以下為跳窗CSS*/
+#t_pop td, #t_pop th {
+	text-align: center;
+	font-size: 1.2rem;
+	font-weight: bolder;
+}
+
+#t_pop input {
+	font-size: 1.2rem;
+}
+
+#background_pop {
+	display: none;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+#div_pop {
+	background: #fff;
+	width: fit-content;
+	z-index: 1;
+	margin: 12% auto;
+	overflow: auto;
+}
+
+
+</style>
+</html>
